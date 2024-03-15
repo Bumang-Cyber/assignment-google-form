@@ -42,7 +42,7 @@ const OptionButton = ({ onChangeCategory, categories }: OptionProps) => {
 export default OptionButton;
 
 const OptionContainer = styled.button`
-  width: 160px;
+  width: 180px;
   height: 56px;
   border-radius: 8px;
   border: 1px solid ${({ theme }) => theme.color.gray400};

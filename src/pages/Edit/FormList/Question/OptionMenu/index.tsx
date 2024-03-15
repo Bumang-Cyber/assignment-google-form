@@ -40,7 +40,7 @@ const Backdrop = styled.div`
 `;
 
 const MenuContainer = styled.div`
-  width: 160px;
+  width: 180px;
   border-radius: 8px;
   border: 1px solid ${({ theme }) => theme.color.gray400};
   padding: 8px 0;
