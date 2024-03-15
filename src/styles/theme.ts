@@ -10,21 +10,41 @@ const fontCreator = (fontSize: string, fontWeight: number, lineHeight: string) =
 
 interface Theme {
   color: {
-    darkGray900: string;
-    darkGray800: string;
-    darkGray700: string;
-    darkGray600: string;
-    darkGray500: string;
-    darkGray400: string;
-    darkGray300: string;
-    lightGray400: string;
-    lightGray300: string;
-    lightGray200: string;
-    lightGray100: string;
-    linkGreen700: string;
-    linkGreen600: string;
-    linkGreen500: string;
-    linkError: string;
+    bg1: "#43618F";
+    bg2: "#3F445C";
+    bg3: "#2A2F4A";
+
+    blueBg3: "#2A2F4A";
+    blueBg2: "#3F445C";
+    blueBg1: "#43618F";
+
+    blue800: "#2565CB";
+    blue700: "#3A7BDF";
+    blue600: "#6195E6";
+    blue500: "#9DBDEF";
+    blue400: "#A9CBFF";
+    blue300: "#C8DEFF";
+    blue200: "#E5F0FF";
+    blue100: "#F4F9FF";
+
+    pink800: "#EB4F27";
+    pink700: "#ED774D";
+    pink600: "#F1A187";
+
+    gray900: "#000000";
+    gray800: "#414447";
+    gray700: "#5C656C";
+    gray600: "#9199A4";
+    gray500: "#B4BCC6";
+    gray400: "#D0DAE3";
+    gray300: "#E5E9ED";
+    gray200: "#F1F5F8";
+    gray100: "#F9F9FA";
+
+    white: "#FFFFFF";
+    navy: "#161C3A";
+    error: "#EE5151";
+    success: "#0CBC72";
   };
   font: {
     subtitle1: Interpolation<object>[];
@@ -56,21 +76,41 @@ interface Theme {
 
 export const theme: Theme = {
   color: {
-    darkGray900: "#121212",
-    darkGray800: "#1E1E1E",
-    darkGray700: "#2C2C2C",
-    darkGray600: "#373737",
-    darkGray500: "#4D4D4D",
-    darkGray400: "#616161",
-    darkGray300: "#727272",
-    lightGray400: "#B4B4B4",
-    lightGray300: "#D9D9D9",
-    lightGray200: "#EDE5E5",
-    lightGray100: "#EDEDED",
-    linkGreen700: "#5B9A74",
-    linkGreen600: "#5FD18D",
-    linkGreen500: "#56F094",
-    linkError: "#9D1414",
+    bg1: "#43618F",
+    bg2: "#3F445C",
+    bg3: "#2A2F4A",
+
+    blueBg3: "#2A2F4A",
+    blueBg2: "#3F445C",
+    blueBg1: "#43618F",
+
+    blue800: "#2565CB",
+    blue700: "#3A7BDF",
+    blue600: "#6195E6",
+    blue500: "#9DBDEF",
+    blue400: "#A9CBFF",
+    blue300: "#C8DEFF",
+    blue200: "#E5F0FF",
+    blue100: "#F4F9FF",
+
+    pink800: "#EB4F27",
+    pink700: "#ED774D",
+    pink600: "#F1A187",
+
+    gray900: "#000000",
+    gray800: "#414447",
+    gray700: "#5C656C",
+    gray600: "#9199A4",
+    gray500: "#B4BCC6",
+    gray400: "#D0DAE3",
+    gray300: "#E5E9ED",
+    gray200: "#F1F5F8",
+    gray100: "#F9F9FA",
+
+    white: "#FFFFFF",
+    navy: "#161C3A",
+    error: "#EE5151",
+    success: "#0CBC72",
   },
   font: {
     subtitle1: fontCreator("40px", 700, "150%"),
