@@ -1,4 +1,4 @@
-import { LevelValueType } from "./../types/level";
+import { LevelValueType } from "@/types/level";
 import { createSlice } from "@reduxjs/toolkit";
 
 type InitialState = {

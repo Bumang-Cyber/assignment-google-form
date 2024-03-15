@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import AddButton from "../../components/AddButton";
+import AddButton from "@/components/AddButton";
 import FormList from "./FormList";
 
 const Edit = () => {

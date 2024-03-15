@@ -1,6 +1,6 @@
 import { MdOutlineShortText } from "react-icons/md";
 import styled from "styled-components";
-import { CategoriesType, Category } from "../../../../../types/category";
+import { CategoriesType, Category } from "@/types/category";
 
 interface MenuProps {
   onChangeCategory: (name: Category) => void;

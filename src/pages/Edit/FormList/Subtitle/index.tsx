@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Input from "../../../../components/Input";
-import FocusIndicator from "../../../../components/FocusIndicator";
+import Input from "@/components/Input";
+import FocusIndicator from "@/components/FocusIndicator";
 
 interface TitleProps {
   select?: boolean;

@@ -1,13 +1,11 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-import { type Category } from "../../../../types/category";
-import { CategoriesType } from "../../../../types/category";
+import { type Category } from "@/types/category";
+import { CategoriesType } from "@/types/category";
 import Short from "./Categories/Short";
 import Long from "./Categories/Long";
 import Choice from "./Categories/Choice";
-import Check from "./Categories/Check";
-import DropDown from "./Categories/DropDown";
 
 import OptionButton from "./OptionButton";
 
@@ -16,9 +14,9 @@ const Question = () => {
   const [categories, setCategories] = useState<CategoriesType>([
     { name: "단답형", select: true, component: <Short /> },
     { name: "장문형", select: false, component: <Long /> },
-    { name: "객관식 질문", select: false, component: <Choice /> },
-    { name: "체크박스", select: false, component: <Check /> },
-    { name: "드롭다운", select: false, component: <DropDown /> },
+    { name: "객관식 질문", select: false, component: <Choice choice="객관식 질문" /> },
+    { name: "체크박스", select: false, component: <Choice choice="체크박스" /> },
+    { name: "드롭다운", select: false, component: <Choice choice="드롭다운" /> },
   ]);
 
   const optionChangeHandler = (name: Category) => {

@@ -3,7 +3,7 @@ import { FaCaretDown } from "react-icons/fa6";
 import styled from "styled-components";
 import { useState } from "react";
 import Menu from "../OptionMenu";
-import { CategoriesType, Category } from "../../../../../types/category";
+import { CategoriesType, Category } from "@/types/category";
 
 interface OptionProps {
   onChangeCategory: (name: Category) => void;
