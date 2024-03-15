@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Question from "../../../components/Question";
-import Title from "../../../components/TItle";
+import Question from "./Question";
+import Title from "./Subtitle";
 import { useState } from "react";
 
 // TODO: 가장 최근 선택 남기기

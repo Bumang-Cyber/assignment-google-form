@@ -4,11 +4,12 @@ interface InputProps {
   type?: "default" | "title";
   value?: string;
   onBlur?: () => void;
+  placeHolder?: string;
 }
 
-const Input = ({ type = "default", value, onBlur }: InputProps) => {
+const Input = ({ type = "default", value, onBlur, placeHolder }: InputProps) => {
   // TODO: 설문지 title이 ""가 되면 '제목없는 설문지'로 타이틀 변경
-  return <InputContainer onBlur={onBlur} value={value} $type={type}></InputContainer>;
+  return <InputContainer placeholder={placeHolder} onBlur={onBlur} value={value} $type={type}></InputContainer>;
 };
 
 export default Input;

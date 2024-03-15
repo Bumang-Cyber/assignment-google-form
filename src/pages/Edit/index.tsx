@@ -21,5 +21,5 @@ const EditContainer = styled.main`
   display: flex;
   gap: 16px;
 
-  padding-top: 24px;
+  padding: 24px 0;
 `;

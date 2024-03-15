@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Input from "../Input";
-import FocusIndicator from "../FocusIndicator";
+import Input from "../../../../components/Input";
+import FocusIndicator from "../../../../components/FocusIndicator";
 
 interface TitleProps {
   select?: boolean;
@@ -11,8 +11,8 @@ const Title = ({ select }: TitleProps) => {
     <Container>
       <HeadDecoration />
       {!select && <FocusIndicator />}
-      <Input type="title"></Input>
-      <Input />
+      <Input type="title" placeHolder="제목 없는 설문지"></Input>
+      <Input placeHolder="설문지 설명" />
     </Container>
   );
 };
@@ -31,6 +31,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  border: 1px solid ${({ theme }) => theme.color.gray300};
 `;
 
 const HeadDecoration = styled.div`
