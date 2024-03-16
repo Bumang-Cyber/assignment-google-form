@@ -1,13 +1,9 @@
 import styled from "styled-components";
 import Question from "./Question";
 import Title from "./Subtitle";
-import { useState } from "react";
 
 // TODO: 가장 최근 선택 남기기
 const FormList = () => {
-  const [titleInfo, setTitleInfo] = useState();
-  const [questionInfo, setQuestionInfo] = useState();
-
   return (
     <FormListContainer>
       <Title></Title>

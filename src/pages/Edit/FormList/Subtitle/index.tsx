@@ -1,18 +1,31 @@
 import styled from "styled-components";
 import Input from "@/components/Input";
 import FocusIndicator from "@/components/FocusIndicator";
+import { useState } from "react";
 
 interface TitleProps {
   select?: boolean;
 }
 
 const Title = ({ select }: TitleProps) => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  console.log(title, description, "titledescription");
+
+  const titleChangeHandler = (str: string, i: number | undefined) => {
+    if (i === 0) {
+      setTitle(str);
+    } else {
+      setDescription(str);
+    }
+  };
+
   return (
     <Container>
       <HeadDecoration />
       {!select && <FocusIndicator />}
-      <Input type="title" placeHolder="제목 없는 설문지"></Input>
-      <Input placeHolder="설문지 설명" />
+      <Input type="title" placeHolder="제목 없는 설문지" onChange={titleChangeHandler} index={0} />
+      <Input placeHolder="설문지 설명" onChange={titleChangeHandler} index={1} />
     </Container>
   );
 };
