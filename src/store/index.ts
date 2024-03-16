@@ -1,25 +1,20 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { type InitialState } from "./formSlice";
-import formSlice from "./formSlice";
+import levelSlice from "./levelSlice";
+import playingStateSlice from "./playingStateSlice";
+import goalAmountSlice from "./goalAmountSlice";
+import mineLeftSlice from "./mineLeftSlice";
+import modalSlice from "./modalSlice";
+import timeSlice from "./timeSlice";
 
 const store = configureStore({
   reducer: {
-    form: formSlice.reducer,
+    levels: levelSlice.reducer,
+    playing: playingStateSlice.reducer,
+    goalAmount: goalAmountSlice.reducer,
+    mineLeft: mineLeftSlice.reducer,
+    modal: modalSlice.reducer,
+    time: timeSlice.reducer,
   },
-});
-
-const saveStateToLocalStorage = (state: { form: InitialState }) => {
-  try {
-    console.log("saveStateToLocalStorage", state);
-    const serializedState = JSON.stringify(state);
-    localStorage.setItem("title-question-form", serializedState);
-  } catch {
-    // ignore write errors
-  }
-};
-
-store.subscribe(() => {
-  saveStateToLocalStorage(store.getState());
 });
 
 // store의 reducer들의 현재 상태의 type

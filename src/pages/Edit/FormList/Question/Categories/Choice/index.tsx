@@ -1,16 +1,16 @@
 import Input from "@/components/Input";
-import { type ChoiceCategoryType } from "@/types/category";
-import { SetStateAction } from "react";
+import { ChoiceCategory } from "@/types/category";
+import { useState } from "react";
 import { CgClose } from "react-icons/cg";
 import styled from "styled-components";
 
 interface ChoiceProps {
-  choice: ChoiceCategoryType;
-  option: string[];
-  setOption: React.Dispatch<SetStateAction<string[]>>;
+  choice: ChoiceCategory;
 }
 
-const Choice = ({ choice, option, setOption }: ChoiceProps) => {
+const Choice = ({ choice }: ChoiceProps) => {
+  const [option, setOption] = useState<string[]>(["옵션 1"]);
+
   const onChangeHandler = (str: string, index: number | undefined) => {
     if (index === undefined) return;
     const copy = [...option];

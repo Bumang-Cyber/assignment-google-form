@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-import { type CategoryType } from "@/types/category";
+import { type Category } from "@/types/category";
 import { CategoriesType } from "@/types/category";
 import Short from "./Categories/Short";
 import Long from "./Categories/Long";
@@ -10,20 +10,16 @@ import Choice from "./Categories/Choice";
 import OptionButton from "./OptionButton";
 
 const Question = () => {
-  // choice형식의 데이터일 때의 옵션 값
-  const [option, setOption] = useState<string[]>(["옵션 1"]);
-
-  // Question의 카테고리 전환
   // TODO: EDITING / BLUR 상태 만들기?
   const [categories, setCategories] = useState<CategoriesType>([
     { name: "단답형", select: true, component: <Short /> },
     { name: "장문형", select: false, component: <Long /> },
-    { name: "객관식 질문", select: false, component: <Choice choice="객관식 질문" option={option} setOption={setOption} /> },
-    { name: "체크박스", select: false, component: <Choice choice="체크박스" option={option} setOption={setOption} /> },
-    { name: "드롭다운", select: false, component: <Choice choice="드롭다운" option={option} setOption={setOption} /> },
+    { name: "객관식 질문", select: false, component: <Choice choice="객관식 질문" /> },
+    { name: "체크박스", select: false, component: <Choice choice="체크박스" /> },
+    { name: "드롭다운", select: false, component: <Choice choice="드롭다운" /> },
   ]);
 
-  const optionChangeHandler = (name: CategoryType) => {
+  const optionChangeHandler = (name: Category) => {
     const temp = [];
     for (let i = 0; i < categories.length; i++) {
       if (categories[i].name === name) {
@@ -42,10 +38,7 @@ const Question = () => {
     <Container>
       <Header>
         <TitleInput placeholder="질문" />
-        <OptionButton //
-          categories={categories}
-          onChangeCategory={optionChangeHandler}
-        />
+        <OptionButton categories={categories} onChangeCategory={optionChangeHandler} />
       </Header>
       {categories.map(({ select, component }) => select && component)}
       <Footer></Footer>
