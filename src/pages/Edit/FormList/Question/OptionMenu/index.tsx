@@ -1,15 +1,15 @@
 import { MdOutlineShortText } from "react-icons/md";
 import styled from "styled-components";
-import { CategoriesType, Category } from "@/types/category";
+import { CategoriesType, CategoryType } from "@/types/category";
 
 interface MenuProps {
-  onChangeCategory: (name: Category) => void;
+  onChangeCategory: (name: CategoryType) => void;
   onChangeShow: () => void;
   categories: CategoriesType;
 }
 
 const OptionMenu = ({ onChangeCategory, onChangeShow, categories }: MenuProps) => {
-  const clickMenuHandler = (name: Category) => {
+  const clickMenuHandler = (name: CategoryType) => {
     onChangeCategory(name);
     onChangeShow();
   };
