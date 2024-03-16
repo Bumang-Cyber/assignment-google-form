@@ -6,7 +6,7 @@ const AddButton = () => {
   const { pushQuestionHandler } = useQuestion();
 
   return (
-    <ButtonContainer onClick={() => pushQuestionHandler({ id: Date.now(), category: "단답형", options: ["옵션 1"] })}>
+    <ButtonContainer onClick={() => pushQuestionHandler({ id: Date.now(), title: "", category: "단답형", options: ["옵션 1"], required: false })}>
       <div>
         <BiPlusCircle className="add" />
       </div>

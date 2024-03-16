@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { type CategoryType } from "@/types/category";
 
-import Short from "./Categories/Short";
-import Long from "./Categories/Long";
-import Choice from "./Categories/Choice";
+import FocusIndicator from "@/components/FocusIndicator";
+import useFocus from "@/hooks/useFocus";
 import OptionButton from "./OptionButton";
+import Body from "./Body";
+import Footer from "./Footer";
 
 interface QuestionProps {
   category: CategoryType;
@@ -13,10 +14,11 @@ interface QuestionProps {
 }
 
 const Question = ({ category, options, index }: QuestionProps) => {
-  // TODO: EDITING / BLUR 상태 만들기?
+  const { focus, focusHandler } = useFocus();
 
   return (
-    <Container>
+    <Container onFocus={focusHandler} onBlur={focusHandler}>
+      <FocusIndicator focus={focus} />
       <Header>
         <TitleInput placeholder="질문" />
         <OptionButton //
@@ -24,33 +26,14 @@ const Question = ({ category, options, index }: QuestionProps) => {
           selected={category}
         />
       </Header>
-      {category === "단답형" && <Short />}
-      {category === "장문형" && <Long />}
-
-      {category === "객관식 질문" && (
-        <Choice //
-          questionIndex={index}
-          choice={category}
-          options={options}
-        />
-      )}
-
-      {category === "체크박스" && (
-        <Choice //
-          questionIndex={index}
-          choice={category}
-          options={options}
-        />
-      )}
-
-      {category === "드롭다운" && (
-        <Choice //
-          questionIndex={index}
-          choice={category}
-          options={options}
-        />
-      )}
-      <Footer></Footer>
+      <Body //
+        category={category}
+        options={options}
+        index={index}
+      />
+      <Footer //
+        index={index}
+      />
     </Container>
   );
 };
@@ -87,5 +70,3 @@ const TitleInput = styled.input`
     border-bottom: 2px solid ${({ theme }) => theme.color.blue700};
   }
 `;
-
-const Footer = styled.div``;

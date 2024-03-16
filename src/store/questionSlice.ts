@@ -9,8 +9,10 @@ const initialState: InitialState = {
   value: [
     {
       id: Date.now(),
+      title: "",
       category: "단답형",
       options: ["옵션 1"],
+      required: false,
     },
   ],
 };

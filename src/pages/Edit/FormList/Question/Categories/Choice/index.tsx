@@ -32,7 +32,6 @@ const Choice = ({ choice, options, questionIndex }: ChoiceProps) => {
 
     const questionsCopy = deepCopy(currentQuestions);
     questionsCopy[questionIndex]["options"] = optionsCopy;
-    console.log(questionsCopy, questionIndex, optionsCopy, "qc");
     changeQuestionHandler(questionsCopy);
   };
 

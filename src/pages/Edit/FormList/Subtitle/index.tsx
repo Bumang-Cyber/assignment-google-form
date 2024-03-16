@@ -1,31 +1,31 @@
 import styled from "styled-components";
 import Input from "@/components/Input";
 import FocusIndicator from "@/components/FocusIndicator";
+import useFocus from "@/hooks/useFocus";
 import { useState } from "react";
 
-interface TitleProps {
-  select?: boolean;
-}
+const Title = () => {
+  const { focus, focusHandler } = useFocus();
 
-const Title = ({ select }: TitleProps) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  console.log(title, description, "titledescription");
+  const [title, setTitle] = useState(() => localStorage.getItem("form-title") || "");
+  const [description, setDescription] = useState(() => localStorage.getItem("form-description") || "");
 
   const titleChangeHandler = (str: string, i: number | undefined) => {
     if (i === 0) {
+      localStorage.setItem("form-title", str);
       setTitle(str);
     } else {
+      localStorage.setItem("form-description", str);
       setDescription(str);
     }
   };
 
   return (
-    <Container>
+    <Container onFocus={focusHandler} onBlur={focusHandler}>
       <HeadDecoration />
-      {!select && <FocusIndicator />}
-      <Input type="title" placeHolder="제목 없는 설문지" onChange={titleChangeHandler} index={0} />
-      <Input placeHolder="설문지 설명" onChange={titleChangeHandler} index={1} />
+      <FocusIndicator focus={focus} />
+      <Input type="title" placeHolder="제목 없는 설문지" onChange={titleChangeHandler} index={0} value={title} />
+      <Input placeHolder="설문지 설명" onChange={titleChangeHandler} index={1} value={description} />
     </Container>
   );
 };
