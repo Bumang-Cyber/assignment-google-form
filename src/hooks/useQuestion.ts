@@ -1,7 +1,7 @@
 import { deepCopy } from "./../utils/deepCopy";
 import { RootState } from "@/store/index";
 import { QuestionType } from "@/types/question";
-import { change, push, pop } from "@/store/questionSlice";
+import { change, push, pop, reset } from "@/store/questionSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const useQuestion = () => {
@@ -46,7 +46,11 @@ const useQuestion = () => {
     dispatch(change(filtered));
   };
 
-  return { currentQuestions, changeQuestionHandler, pushQuestionHandler, popQuestionHandler, setRequiredByIndexHandler, copyByIndexHandler, deleteByIndexHandler };
+  const resetAllHandler = () => {
+    dispatch(reset());
+  };
+
+  return { currentQuestions, changeQuestionHandler, pushQuestionHandler, popQuestionHandler, setRequiredByIndexHandler, copyByIndexHandler, deleteByIndexHandler, resetAllHandler };
 };
 
 export default useQuestion;

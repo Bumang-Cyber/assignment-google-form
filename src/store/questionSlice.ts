@@ -37,13 +37,16 @@ const questionSlice = createSlice({
       state.value = action.payload;
     },
     push: (state, action) => {
-      state.value.push(action.payload); // 새로운 항목을 배열에 추가합니다.
+      state.value = [...state.value, action.payload];
     },
     pop: (state) => {
-      state.value.pop(); // 새로운 항목을 배열에 추가합니다.
+      state.value = [...state.value].pop();
+    },
+    reset: (state) => {
+      state.value = [];
     },
   },
 });
 
 export default questionSlice;
-export const { change, push, pop } = questionSlice.actions;
+export const { change, push, pop, reset } = questionSlice.actions;

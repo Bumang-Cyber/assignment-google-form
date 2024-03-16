@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Short = () => {
-  return <InputContainer placeholder="단답형 텍스트" disabled />;
+  return <InputContainer placeholder="단답형 텍스트" />;
 };
 
 export default Short;

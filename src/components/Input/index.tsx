@@ -7,9 +7,10 @@ interface InputProps {
   onBlur?: () => void;
   placeHolder?: string;
   index?: number;
+  isDisabled?: boolean;
 }
 
-const Input = ({ type = "default", value, onBlur, placeHolder, onChange, index }: InputProps) => {
+const Input = ({ type = "default", value, onBlur, placeHolder, onChange, index, isDisabled }: InputProps) => {
   return (
     <InputContainer //
       placeholder={placeHolder}
@@ -17,6 +18,7 @@ const Input = ({ type = "default", value, onBlur, placeHolder, onChange, index }
       value={value}
       $type={type}
       onChange={(e) => onChange(e.target.value, index)}
+      disabled={isDisabled}
     />
   );
 };
@@ -29,6 +31,7 @@ const InputContainer = styled.input<{ $type: string }>`
   border-bottom: 1px solid ${({ theme }) => theme.color.gray400};
 
   ${({ theme, $type }) => ($type === "default" ? theme.font.body3r : theme.font.subtitle3)}
+  background-color: white;
 
   transition: all 0.2s ease-in-out;
 

@@ -8,7 +8,7 @@ const Long = () => {
     target.style.height = target.scrollHeight + "px";
   };
 
-  return <InputContainer placeholder="장문형 텍스트" onInput={inputHandler} disabled />;
+  return <InputContainer placeholder="장문형 텍스트" onInput={inputHandler} />;
 };
 
 export default Long;

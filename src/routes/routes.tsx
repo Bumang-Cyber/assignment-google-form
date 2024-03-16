@@ -1,24 +1,19 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "@/App";
-import Preview from "@/pages/Preview";
 import Edit from "@/pages/Edit";
-import Layout from "@/components/Layout";
+import Preview from "@/pages/Preview";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <Layout>
-        <App />
-      </Layout>
-    ),
+    element: <App />,
     children: [
       {
         index: true,
         element: <Edit />,
       },
       {
-        path: "/preview",
+        path: "preview",
         element: <Preview />,
       },
     ],
