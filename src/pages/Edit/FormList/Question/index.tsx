@@ -1,46 +1,65 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { SetStateAction } from "react";
 
-import { type Category } from "@/types/category";
-import { CategoriesType } from "@/types/category";
+import { type CategoryType } from "@/types/category";
 import Short from "./Categories/Short";
 import Long from "./Categories/Long";
 import Choice from "./Categories/Choice";
 
 import OptionButton from "./OptionButton";
+import { QuestionType } from "@/types/question";
 
-const Question = () => {
+interface QuestionProps {
+  onSetQuestions: React.Dispatch<SetStateAction<QuestionType[]>>;
+  questions: QuestionType[];
+  category: CategoryType;
+  options: string[];
+  index: number;
+}
+
+const Question = ({ category, questions, onSetQuestions, options, index }: QuestionProps) => {
   // TODO: EDITING / BLUR 상태 만들기?
-  const [categories, setCategories] = useState<CategoriesType>([
-    { name: "단답형", select: true, component: <Short /> },
-    { name: "장문형", select: false, component: <Long /> },
-    { name: "객관식 질문", select: false, component: <Choice choice="객관식 질문" /> },
-    { name: "체크박스", select: false, component: <Choice choice="체크박스" /> },
-    { name: "드롭다운", select: false, component: <Choice choice="드롭다운" /> },
-  ]);
-
-  const optionChangeHandler = (name: Category) => {
-    const temp = [];
-    for (let i = 0; i < categories.length; i++) {
-      if (categories[i].name === name) {
-        categories[i].select = true;
-        temp.push(categories[i]);
-      } else {
-        categories[i].select = false;
-        temp.push(categories[i]);
-      }
-    }
-
-    setCategories(temp);
-  };
 
   return (
     <Container>
       <Header>
         <TitleInput placeholder="질문" />
-        <OptionButton categories={categories} onChangeCategory={optionChangeHandler} />
+        <OptionButton //
+          index={index}
+          selected={category}
+          questions={questions}
+          onSetQuestions={onSetQuestions}
+        />
       </Header>
-      {categories.map(({ select, component }) => select && component)}
+      {category === "단답형" && <Short />}
+      {category === "장문형" && <Long />}
+      {category === "객관식 질문" && (
+        <Choice //
+          choice={category}
+          options={options}
+          questions={questions}
+          questionIndex={index}
+          onSetQuestions={onSetQuestions}
+        />
+      )}
+      {category === "체크박스" && (
+        <Choice //
+          choice={category}
+          options={options}
+          questions={questions}
+          questionIndex={index}
+          onSetQuestions={onSetQuestions}
+        />
+      )}
+      {category === "드롭다운" && (
+        <Choice //
+          choice={category}
+          options={options}
+          questions={questions}
+          questionIndex={index}
+          onSetQuestions={onSetQuestions}
+        />
+      )}
       <Footer></Footer>
     </Container>
   );

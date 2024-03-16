@@ -1,16 +1,19 @@
 import { MdOutlineShortText } from "react-icons/md";
 import { FaCaretDown } from "react-icons/fa6";
 import styled from "styled-components";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import Menu from "../OptionMenu";
-import { CategoriesType, Category } from "@/types/category";
+import { type CategoryType, categories } from "@/types/category";
+import { QuestionType } from "@/types/question";
 
 interface OptionProps {
-  onChangeCategory: (name: Category) => void;
-  categories: CategoriesType;
+  index: number;
+  selected: CategoryType;
+  questions: QuestionType[];
+  onSetQuestions: React.Dispatch<SetStateAction<QuestionType[]>>;
 }
 
-const OptionButton = ({ onChangeCategory, categories }: OptionProps) => {
+const OptionButton = ({ selected, questions, onSetQuestions, index }: OptionProps) => {
   const [isShow, setIsShow] = useState(false);
 
   const changeShowHandler = () => setIsShow((prev) => !prev);
@@ -19,12 +22,12 @@ const OptionButton = ({ onChangeCategory, categories }: OptionProps) => {
     return (
       <>
         {categories.map(
-          ({ name, select }) =>
-            select === true && (
+          (category) =>
+            category === selected && (
               <OptionContainer onClick={changeShowHandler}>
                 <div>
                   <MdOutlineShortText className="icon" />
-                  <span>{name}</span>
+                  <span>{category}</span>
                 </div>
                 <FaCaretDown />
               </OptionContainer>
@@ -35,7 +38,14 @@ const OptionButton = ({ onChangeCategory, categories }: OptionProps) => {
   }
 
   if (isShow) {
-    return <Menu categories={categories} onChangeCategory={onChangeCategory} onChangeShow={changeShowHandler} />;
+    return (
+      <Menu
+        index={index} //
+        onSetQuestions={onSetQuestions}
+        questions={questions}
+        onChangeShow={changeShowHandler}
+      />
+    );
   }
 };
 

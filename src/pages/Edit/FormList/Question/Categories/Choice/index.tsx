@@ -1,34 +1,50 @@
 import Input from "@/components/Input";
-import { ChoiceCategory } from "@/types/category";
-import { useState } from "react";
+import { type ChoiceCategory } from "@/types/category";
+import { type QuestionType } from "@/types/question";
+import { SetStateAction } from "react";
 import { CgClose } from "react-icons/cg";
 import styled from "styled-components";
 
 interface ChoiceProps {
   choice: ChoiceCategory;
+  options: string[];
+  questions: QuestionType[];
+  questionIndex: number;
+  onSetQuestions: React.Dispatch<SetStateAction<QuestionType[]>>;
 }
 
-const Choice = ({ choice }: ChoiceProps) => {
-  const [option, setOption] = useState<string[]>(["옵션 1"]);
-
+const Choice = ({ choice, options, questions, questionIndex, onSetQuestions }: ChoiceProps) => {
   const onChangeHandler = (str: string, index: number | undefined) => {
     if (index === undefined) return;
-    const copy = [...option];
-    copy[index] = str;
-    setOption(copy);
-    console.log(option, "option");
+    const optionsCopy = [...options];
+    optionsCopy[index] = str;
+    console.log(optionsCopy, "optionsCopy");
+
+    const questionsCopy = [...questions];
+    questionsCopy[questionIndex]["options"] = optionsCopy;
+
+    onSetQuestions(questionsCopy);
   };
 
   const onAddHandler = () => {
-    const order = option.length + 1;
-    setOption([...option, `옵션 ${order}`]);
+    const order = options.length + 1;
+    const optionsCopy = [...options, `옵션 ${order}`];
+
+    const questionsCopy = [...questions];
+    questionsCopy[questionIndex]["options"] = optionsCopy;
+    console.log(questionsCopy, questionIndex, optionsCopy, "qc");
+    onSetQuestions(questionsCopy);
   };
 
   const onDeleteHandler = (index: number | undefined) => {
-    if (!index) return;
-    const copy = [...option];
-    const filtered = copy.filter((_, i) => i !== index);
-    setOption(filtered);
+    if (index === undefined) return;
+    const optionsCopy = [...options];
+    const filtered = optionsCopy.filter((_, i) => i !== index);
+
+    const questionsCopy = [...questions];
+    questionsCopy[questionIndex]["options"] = filtered;
+
+    onSetQuestions(questionsCopy);
   };
 
   const onCheckRadio = (e: React.MouseEvent<HTMLInputElement>) => {
@@ -38,7 +54,7 @@ const Choice = ({ choice }: ChoiceProps) => {
 
   return (
     <ChoiceList>
-      {option.map((string, i) => (
+      {options.map((string, i) => (
         <ChoiceContainer key={i}>
           {choice === "객관식 질문" && <input type="radio" onClick={onCheckRadio} />}
           {choice === "체크박스" && <input type="checkbox" onClick={onCheckRadio} />}
