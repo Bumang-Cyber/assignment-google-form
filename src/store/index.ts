@@ -1,19 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import levelSlice from "./levelSlice";
-import playingStateSlice from "./playingStateSlice";
-import goalAmountSlice from "./goalAmountSlice";
-import mineLeftSlice from "./mineLeftSlice";
-import modalSlice from "./modalSlice";
-import timeSlice from "./timeSlice";
+import questionSlice from "./questionSlice";
 
 const store = configureStore({
   reducer: {
-    levels: levelSlice.reducer,
-    playing: playingStateSlice.reducer,
-    goalAmount: goalAmountSlice.reducer,
-    mineLeft: mineLeftSlice.reducer,
-    modal: modalSlice.reducer,
-    time: timeSlice.reducer,
+    question: questionSlice.reducer,
   },
 });
 

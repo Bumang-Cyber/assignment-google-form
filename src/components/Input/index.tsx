@@ -10,8 +10,15 @@ interface InputProps {
 }
 
 const Input = ({ type = "default", value, onBlur, placeHolder, onChange, index }: InputProps) => {
-  // TODO: 설문지 title이 ""가 되면 '제목없는 설문지'로 타이틀 변경
-  return <InputContainer placeholder={placeHolder} onBlur={onBlur} value={value} $type={type} onChange={(e) => onChange(e.target.value, index)} />;
+  return (
+    <InputContainer //
+      placeholder={placeHolder}
+      onBlur={onBlur}
+      value={value}
+      $type={type}
+      onChange={(e) => onChange(e.target.value, index)}
+    />
+  );
 };
 
 export default Input;

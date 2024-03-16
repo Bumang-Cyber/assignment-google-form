@@ -1,21 +1,21 @@
 import { MdOutlineShortText } from "react-icons/md";
 import styled from "styled-components";
 import { CategoryType, categories } from "@/types/category";
-import { SetStateAction } from "react";
-import { QuestionType } from "@/types/question";
+import useQuestion from "@/hooks/useQuestion";
+import { deepCopy } from "@/utils/deepCopy";
 
 interface MenuProps {
-  onSetQuestions: React.Dispatch<SetStateAction<QuestionType[]>>;
-  questions: QuestionType[];
-  index: number;
   onChangeShow: () => void;
+  index: number;
 }
 
-const OptionMenu = ({ onChangeShow, onSetQuestions, questions, index }: MenuProps) => {
+const OptionMenu = ({ onChangeShow, index }: MenuProps) => {
+  const { currentQuestions, changeQuestionHandler } = useQuestion();
+
   const clickMenuHandler = (name: CategoryType) => {
-    const questionCopy = [...questions];
+    const questionCopy = deepCopy(currentQuestions);
     questionCopy[index]["category"] = name;
-    onSetQuestions(questionCopy);
+    changeQuestionHandler(questionCopy);
     onChangeShow();
   };
 
@@ -23,8 +23,8 @@ const OptionMenu = ({ onChangeShow, onSetQuestions, questions, index }: MenuProp
     <>
       <Backdrop onClick={onChangeShow} />
       <MenuContainer>
-        {categories.map((category: CategoryType) => (
-          <div onClick={() => clickMenuHandler(category)}>
+        {categories.map((category: CategoryType, i) => (
+          <div key={i} onClick={() => clickMenuHandler(category)}>
             <MdOutlineShortText className="icon" />
             <span>{category}</span>
           </div>

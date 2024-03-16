@@ -1,19 +1,18 @@
+import { type CategoryType, categories } from "@/types/category";
+
 import { MdOutlineShortText } from "react-icons/md";
 import { FaCaretDown } from "react-icons/fa6";
+
+import { useState } from "react";
 import styled from "styled-components";
-import { SetStateAction, useState } from "react";
 import Menu from "../OptionMenu";
-import { type CategoryType, categories } from "@/types/category";
-import { QuestionType } from "@/types/question";
 
 interface OptionProps {
   index: number;
   selected: CategoryType;
-  questions: QuestionType[];
-  onSetQuestions: React.Dispatch<SetStateAction<QuestionType[]>>;
 }
 
-const OptionButton = ({ selected, questions, onSetQuestions, index }: OptionProps) => {
+const OptionButton = ({ selected, index }: OptionProps) => {
   const [isShow, setIsShow] = useState(false);
 
   const changeShowHandler = () => setIsShow((prev) => !prev);
@@ -24,7 +23,7 @@ const OptionButton = ({ selected, questions, onSetQuestions, index }: OptionProp
         {categories.map(
           (category) =>
             category === selected && (
-              <OptionContainer onClick={changeShowHandler}>
+              <OptionContainer key={index} onClick={changeShowHandler}>
                 <div>
                   <MdOutlineShortText className="icon" />
                   <span>{category}</span>
@@ -41,8 +40,6 @@ const OptionButton = ({ selected, questions, onSetQuestions, index }: OptionProp
     return (
       <Menu
         index={index} //
-        onSetQuestions={onSetQuestions}
-        questions={questions}
         onChangeShow={changeShowHandler}
       />
     );
