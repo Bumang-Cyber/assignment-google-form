@@ -17,9 +17,21 @@ const initialState: InitialState = {
   ],
 };
 
+const loadStateFromLocalStorage = () => {
+  try {
+    const serializedState = localStorage.getItem("form-questions");
+    if (serializedState === null) return initialState;
+
+    const parsed = JSON.parse(serializedState);
+    return parsed.question;
+  } catch (err) {
+    return initialState;
+  }
+};
+
 const questionSlice = createSlice({
   name: "question",
-  initialState,
+  initialState: loadStateFromLocalStorage() || initialState,
   reducers: {
     change: (state, action) => {
       state.value = action.payload;
