@@ -21,7 +21,7 @@ const Layout = ({ children }: LayoutProps) => {
 export default Layout;
 
 const LayoutContainer = styled.div`
-  margin-top: 80px;
+  margin-top: 96px;
   width: 100vw;
   height: 100%;
 

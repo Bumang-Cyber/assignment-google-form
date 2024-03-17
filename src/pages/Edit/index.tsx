@@ -51,5 +51,7 @@ const EditContainer = styled.main`
   display: flex;
   gap: 16px;
 
-  padding: 24px 0;
+  @media only screen and (max-width: 768px) {
+    padding: 0 24px;
+  }
 `;

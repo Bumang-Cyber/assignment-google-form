@@ -6,8 +6,10 @@ import { deepCopy } from "@/utils/deepCopy";
 import { Draggable, Droppable } from "@hello-pangea/dnd";
 
 import { useState } from "react";
+import { BiPlus as PlusIcon } from "react-icons/bi";
 import { CgClose as CloseIcon } from "react-icons/cg";
 import { MdOutlineDragIndicator as DragIcon } from "react-icons/md";
+
 import styled from "styled-components";
 
 interface ChoiceProps {
@@ -85,7 +87,7 @@ const Choice = ({ choice, options, questionIndex }: ChoiceProps) => {
             </Draggable>
           ))}
           <AddContainer onClick={onAddHandler} className="add-button">
-            <input type="radio" onClick={onCheckRadio} />
+            <PlusIcon />
             <AddText>옵션 추가</AddText>
           </AddContainer>
           {innerProvided.placeholder}
@@ -102,7 +104,6 @@ const ChoiceList = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
 
   .drag-handle {
     opacity: 0;
@@ -148,7 +149,7 @@ const AddContainer = styled.div`
   color: ${({ theme }) => theme.color.gray700};
 
   position: absolute;
-  bottom: 58px;
+  bottom: 72px;
 `;
 
 const AddText = styled.div`
@@ -156,6 +157,7 @@ const AddText = styled.div`
     text-decoration: underline;
     text-underline-offset: 4px;
   }
+  transform: translateX(-1px);
 `;
 
 const Index = styled.div`

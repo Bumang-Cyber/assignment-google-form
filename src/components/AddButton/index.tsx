@@ -45,4 +45,12 @@ const ButtonContainer = styled.div`
   & div:hover {
     background-color: ${({ theme }) => theme.color.gray100};
   }
+
+  @media only screen and (max-width: 768px) {
+    position: fixed;
+    z-index: 10;
+    top: 8px;
+    right: 24px;
+    border: 1px solid ${({ theme }) => theme.color.gray400};
+  }
 `;

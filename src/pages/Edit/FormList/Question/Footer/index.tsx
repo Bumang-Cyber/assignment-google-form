@@ -39,7 +39,8 @@ const FooterContainer = styled.div`
   align-items: center;
   gap: 16px;
 
-  margin-top: 16px;
+  margin-top: 32px;
+  flex-shrink: 0;
 `;
 
 const Copy = styled.button`
