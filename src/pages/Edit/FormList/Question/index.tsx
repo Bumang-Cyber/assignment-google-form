@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { type CategoryType } from "@/types/category";
 import { deepCopy } from "@/utils/deepCopy";
+import { MdOutlineDragIndicator as Drag } from "react-icons/md";
+import { Draggable } from "@hello-pangea/dnd";
 
 import FocusIndicator from "@/components/FocusIndicator";
 import useFocus from "@/hooks/useFocus";
@@ -14,11 +16,13 @@ interface QuestionProps {
   options: string[];
   index: number;
   title: string;
+  id: number;
 }
 
-const Question = ({ category, options, index, title }: QuestionProps) => {
-  const { focus, focusHandler } = useFocus();
+const Question = ({ category, options, index, title, id }: QuestionProps) => {
+  const { focus, focusHandler, blurHandler } = useFocus();
   const { currentQuestions, changeQuestionHandler } = useQuestion();
+  const draggableId = id.toString();
 
   const titleChangeHandler = (str: string) => {
     const copy = deepCopy(currentQuestions);
@@ -28,24 +32,41 @@ const Question = ({ category, options, index, title }: QuestionProps) => {
   };
 
   return (
-    <Container onFocus={focusHandler} onBlur={focusHandler}>
-      <FocusIndicator focus={focus} />
-      <Header>
-        <TitleInput placeholder="질문" value={title} onChange={(e) => titleChangeHandler(e.target.value)} />
-        <OptionButton //
-          index={index}
-          selected={category}
-        />
-      </Header>
-      <Body //
-        category={category}
-        options={options}
-        index={index}
-      />
-      <Footer //
-        index={index}
-      />
-    </Container>
+    <Draggable draggableId={draggableId} index={index}>
+      {(provided) => (
+        <Container //
+          onFocus={focusHandler}
+          onBlur={blurHandler}
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          <FocusIndicator focus={focus} />
+          <DragContainer>
+            <DragIcon />
+          </DragContainer>
+          <Header>
+            <TitleInput //
+              placeholder="질문"
+              value={title}
+              onChange={(e) => titleChangeHandler(e.target.value)}
+            />
+            <OptionButton //
+              index={index}
+              selected={category}
+            />
+          </Header>
+          <Body //
+            category={category}
+            options={options}
+            index={index}
+          />
+          <Footer //
+            index={index}
+          />
+        </Container>
+      )}
+    </Draggable>
   );
 };
 
@@ -87,5 +108,30 @@ const TitleInput = styled.input`
     padding: 0 16px;
     background-color: ${({ theme }) => theme.color.gray100};
     border-bottom: 2px solid ${({ theme }) => theme.color.blue700};
+  }
+`;
+
+const DragContainer = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: 0 auto;
+
+  height: 20px;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const DragIcon = styled(Drag)`
+  transform: rotate(90deg);
+  font-size: 24px;
+  color: ${({ theme }) => theme.color.gray400};
+
+  &:hover {
+    color: ${({ theme }) => theme.color.gray700};
   }
 `;

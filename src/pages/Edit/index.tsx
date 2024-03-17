@@ -1,11 +1,27 @@
 import styled from "styled-components";
 import AddButton from "@/components/AddButton";
 import FormList from "./FormList";
+import { DragDropContext, DropResult } from "@hello-pangea/dnd";
+import useQuestion from "@/hooks/useQuestion";
 
 const Edit = () => {
+  const { currentQuestions, changeQuestionHandler } = useQuestion();
+
+  const onDragEnd = ({ destination, source }: DropResult) => {
+    if (!destination) return; // 드래그를 취소한 경우
+
+    const newItems = [...currentQuestions];
+    const [reorderedItem] = newItems.splice(source.index, 1);
+    newItems.splice(destination.index, 0, reorderedItem);
+
+    changeQuestionHandler(newItems);
+  };
+
   return (
     <EditContainer>
-      <FormList />
+      <DragDropContext onDragEnd={onDragEnd}>
+        <FormList />
+      </DragDropContext>
       <AddButton />
     </EditContainer>
   );
