@@ -65,6 +65,7 @@ const MenuContainer = styled.div`
   z-index: 1;
   background-color: white;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  ${({ theme }) => theme.font.body3r};
 
   div {
     display: flex;

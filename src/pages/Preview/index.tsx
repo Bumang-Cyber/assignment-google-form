@@ -22,4 +22,8 @@ const PreviewContainer = styled.div`
   gap: 16px;
 
   padding: 24px 0;
+  margin-bottom: 180px;
+  @media only screen and (max-width: 768px) {
+    padding: 24px 24px;
+  }
 `;

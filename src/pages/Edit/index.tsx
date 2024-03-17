@@ -50,6 +50,7 @@ const EditContainer = styled.main`
 
   display: flex;
   gap: 16px;
+  margin-bottom: 180px;
 
   @media only screen and (max-width: 768px) {
     padding: 0 24px;

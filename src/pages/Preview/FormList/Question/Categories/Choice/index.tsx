@@ -5,16 +5,17 @@ import { deepCopy } from "@/utils/deepCopy";
 import styled from "styled-components";
 import Dropdown from "./Dropdown";
 import { useState } from "react";
+import { OptionType } from "@/types/question";
 
 interface ChoiceProps {
   choice: ChoiceCategory;
-  options: string[];
+  options: OptionType[];
   questionIndex: number;
 }
 
 const Choice = ({ choice, options, questionIndex }: ChoiceProps) => {
   const { currentQuestions, changeQuestionHandler } = useQuestion();
-  const [selected, setSelected] = useState(options[0]);
+  const [selected, setSelected] = useState(options[0].content);
 
   const onChangeHandler = (str: string, index: number | undefined) => {
     if (index === undefined) return;
@@ -31,7 +32,7 @@ const Choice = ({ choice, options, questionIndex }: ChoiceProps) => {
   if (choice === "객관식 질문" || choice === "체크박스") {
     return (
       <ChoiceList>
-        {options.map((string, i) => (
+        {options.map((option, i) => (
           <ChoiceContainer key={i}>
             {choice === "객관식 질문" && <input name="radio" type="radio" />}
             {choice === "체크박스" && <input type="checkbox" />}
@@ -39,7 +40,7 @@ const Choice = ({ choice, options, questionIndex }: ChoiceProps) => {
               index={i}
               onChange={onChangeHandler}
               placeHolder="옵션"
-              value={string}
+              value={option.content}
               isDisabled={true}
             />
           </ChoiceContainer>

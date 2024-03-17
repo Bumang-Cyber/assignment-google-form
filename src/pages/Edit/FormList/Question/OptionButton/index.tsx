@@ -61,6 +61,7 @@ const OptionContainer = styled.button`
   height: 56px;
   border-radius: 8px;
   border: 1px solid ${({ theme }) => theme.color.gray400};
+  ${({ theme }) => theme.font.body3r};
 
   display: flex;
   justify-content: space-between;

@@ -1,3 +1,4 @@
+import { OptionType } from "@/types/question";
 import { SetStateAction } from "react";
 import { MdOutlineShortText } from "react-icons/md";
 import styled from "styled-components";
@@ -5,7 +6,7 @@ import styled from "styled-components";
 interface MenuProps {
   index: number;
   onChangeShow: () => void;
-  options: string[];
+  options: OptionType[];
   setSelected: React.Dispatch<SetStateAction<string>>;
 }
 
@@ -20,9 +21,9 @@ const OptionMenu = ({ onChangeShow, options, setSelected }: MenuProps) => {
       <Backdrop onClick={onChangeShow} />
       <MenuContainer>
         {options.map((item, i) => (
-          <div key={i} onClick={() => clickHandler(item)}>
+          <div key={i} onClick={() => clickHandler(item.content)}>
             <MdOutlineShortText className="icon" />
-            <span>{item}</span>
+            <span>{item.content}</span>
           </div>
         ))}
       </MenuContainer>
@@ -49,6 +50,7 @@ const MenuContainer = styled.div`
   z-index: 1;
   background-color: white;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  ${({ theme }) => theme.font.body2r};
 
   div {
     display: flex;

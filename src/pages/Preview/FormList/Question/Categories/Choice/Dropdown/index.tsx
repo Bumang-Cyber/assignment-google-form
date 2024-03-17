@@ -4,11 +4,12 @@ import { FaCaretDown } from "react-icons/fa6";
 import { SetStateAction, useState } from "react";
 import styled from "styled-components";
 import Menu from "../DropdownMenu";
+import { OptionType } from "@/types/question";
 
 interface OptionProps {
   index: number;
   selected: string;
-  options: string[];
+  options: OptionType[];
   setSelected: React.Dispatch<SetStateAction<string>>;
 }
 
@@ -48,6 +49,7 @@ const OptionContainer = styled.button`
   height: 56px;
   border-radius: 8px;
   border: 1px solid ${({ theme }) => theme.color.gray400};
+  ${({ theme }) => theme.font.body2r};
 
   display: flex;
   justify-content: space-between;

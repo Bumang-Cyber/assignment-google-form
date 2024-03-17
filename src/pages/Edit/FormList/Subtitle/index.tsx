@@ -12,10 +12,8 @@ const Title = () => {
 
   const titleChangeHandler = (str: string, i: number | undefined) => {
     if (i === 0) {
-      localStorage.setItem("form-title", str);
       setTitle(str);
     } else {
-      localStorage.setItem("form-description", str);
       setDescription(str);
     }
   };
