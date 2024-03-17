@@ -62,7 +62,7 @@ const Choice = ({ choice, options, questionIndex }: ChoiceProps) => {
   };
 
   return (
-    <Droppable droppableId={`innerDroppable-${Math.random()}`} type="option-droppable">
+    <Droppable droppableId={`innerDroppable-${questionIndex}`} type="option-droppable">
       {(innerProvided) => (
         <ChoiceList ref={innerProvided.innerRef} {...innerProvided.droppableProps}>
           {options.map((option, i) => (
