@@ -25,7 +25,6 @@ const useQuestion = () => {
   const setRequiredByIndexHandler = (toggle: boolean, index: number) => {
     const copied = deepCopy(currentQuestions);
     copied[index].required = toggle;
-    console.log(currentQuestions[index]);
     dispatch(change(copied));
   };
 

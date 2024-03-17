@@ -11,12 +11,14 @@ const FormList = () => {
   return (
     <FormListContainer>
       <Title />
-      {currentQuestions.map(({ category, id, options }, index) => (
+      {currentQuestions.map(({ category, id, options, required, title }, index) => (
         <Question
           key={id} //
           index={index}
           category={category}
           options={options}
+          required={required}
+          title={title}
         />
       ))}
     </FormListContainer>
