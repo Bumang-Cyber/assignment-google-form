@@ -30,19 +30,24 @@ const useQuestion = () => {
 
   const copyByIndexHandler = (index: number) => {
     const copied = deepCopy(currentQuestions);
+    console.log(copied);
     const prior = copied.slice(0, index + 1);
     const latter = copied.slice(index + 1);
 
-    const target = prior[prior.length - 1];
+    const popped = prior.pop();
+    const target = deepCopy(popped);
     target.id = Date.now();
+    prior.push(popped);
     prior.push(target);
     dispatch(change([...prior, ...latter]));
   };
 
   const deleteByIndexHandler = (index: number) => {
     const copied = deepCopy(currentQuestions);
-    const filtered = copied.splice(index, 1);
-    dispatch(change(filtered));
+    console.log(copied);
+    copied.splice(index, 1);
+    console.log(copied);
+    dispatch(change(copied));
   };
 
   const resetAllHandler = () => {

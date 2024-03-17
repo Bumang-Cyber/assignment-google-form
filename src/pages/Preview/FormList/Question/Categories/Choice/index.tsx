@@ -5,21 +5,20 @@ import { deepCopy } from "@/utils/deepCopy";
 import styled from "styled-components";
 import Dropdown from "./Dropdown";
 import { useState } from "react";
-import { OptionType } from "@/types/question";
 
 interface ChoiceProps {
   choice: ChoiceCategory;
-  options: OptionType[];
+  options: string[];
   questionIndex: number;
 }
 
 const Choice = ({ choice, options, questionIndex }: ChoiceProps) => {
   const { currentQuestions, changeQuestionHandler } = useQuestion();
-  const [selected, setSelected] = useState(options[0].content);
+  const [selected, setSelected] = useState(options[0]);
 
   const onChangeHandler = (str: string, index: number | undefined) => {
     if (index === undefined) return;
-    const optionsCopy = deepCopy(options);
+    const optionsCopy = [...options];
     optionsCopy[index] = str;
     console.log(optionsCopy, "optionsCopy");
 
@@ -40,7 +39,7 @@ const Choice = ({ choice, options, questionIndex }: ChoiceProps) => {
               index={i}
               onChange={onChangeHandler}
               placeHolder="옵션"
-              value={option.content}
+              value={option}
               isDisabled={true}
             />
           </ChoiceContainer>

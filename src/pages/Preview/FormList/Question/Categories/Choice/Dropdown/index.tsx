@@ -4,12 +4,11 @@ import { FaCaretDown } from "react-icons/fa6";
 import { SetStateAction, useState } from "react";
 import styled from "styled-components";
 import Menu from "../DropdownMenu";
-import { OptionType } from "@/types/question";
 
 interface OptionProps {
   index: number;
   selected: string;
-  options: OptionType[];
+  options: string[];
   setSelected: React.Dispatch<SetStateAction<string>>;
 }
 

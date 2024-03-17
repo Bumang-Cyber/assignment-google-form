@@ -1,4 +1,5 @@
 import { QuestionType } from "@/types/question";
+import { deepCopy } from "@/utils/deepCopy";
 import { createSlice } from "@reduxjs/toolkit";
 
 type InitialState = {
@@ -11,7 +12,7 @@ const initialState: InitialState = {
       id: Date.now(),
       title: "",
       category: "단답형",
-      options: [{ id: Date.now(), content: "옵션 1" }],
+      options: ["옵션 1"],
       required: false,
     },
   ],
@@ -40,7 +41,7 @@ const questionSlice = createSlice({
       state.value = [...state.value, action.payload];
     },
     pop: (state) => {
-      state.value = [...state.value].pop();
+      state.value = deepCopy(state.value).pop();
     },
     reset: (state) => {
       state.value = [];

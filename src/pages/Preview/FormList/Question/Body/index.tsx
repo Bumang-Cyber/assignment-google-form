@@ -2,11 +2,10 @@ import Short from "../Categories/Short";
 import Long from "../Categories/Long";
 import Choice from "../Categories/Choice";
 import { CategoryType } from "@/types/category";
-import { OptionType } from "@/types/question";
 
 interface BodyProps {
   category: CategoryType;
-  options: OptionType[];
+  options: string[];
   index: number;
 }
 

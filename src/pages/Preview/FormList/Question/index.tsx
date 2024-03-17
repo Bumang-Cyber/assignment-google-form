@@ -3,11 +3,10 @@ import { type CategoryType } from "@/types/category";
 
 import Body from "./Body";
 import { FiAlertCircle } from "react-icons/fi";
-import { OptionType } from "@/types/question";
 
 interface QuestionProps {
   category: CategoryType;
-  options: OptionType[];
+  options: string[];
   index: number;
   required: boolean;
   title: string;

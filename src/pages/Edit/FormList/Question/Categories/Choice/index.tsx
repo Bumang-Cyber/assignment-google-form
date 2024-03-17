@@ -1,7 +1,6 @@
 import Input from "@/components/Input";
 import useQuestion from "@/hooks/useQuestion";
 import { type ChoiceCategory } from "@/types/category";
-import { OptionType } from "@/types/question";
 import { deepCopy } from "@/utils/deepCopy";
 import { Draggable, Droppable } from "@hello-pangea/dnd";
 
@@ -14,7 +13,7 @@ import styled from "styled-components";
 
 interface ChoiceProps {
   choice: ChoiceCategory;
-  options: OptionType[];
+  options: string[];
   questionIndex: number;
 }
 useState;
@@ -23,9 +22,8 @@ const Choice = ({ choice, options, questionIndex }: ChoiceProps) => {
 
   const onChangeHandler = (str: string, index: number | undefined) => {
     if (index === undefined) return;
-    const optionsCopy = deepCopy(options);
-    optionsCopy[index].content = str;
-    console.log(optionsCopy, "optionsCopy");
+    const optionsCopy = [...options];
+    optionsCopy[index] = str;
 
     const questionsCopy = deepCopy(currentQuestions);
     questionsCopy[questionIndex]["options"] = optionsCopy;
@@ -35,20 +33,25 @@ const Choice = ({ choice, options, questionIndex }: ChoiceProps) => {
 
   const onAddHandler = () => {
     const order = options.length + 1;
-    const optionsCopy = [...options, { id: Date.now(), content: `옵션 ${order}` }];
+    const optionsCopy = [...options, `옵션 ${order}`];
 
+    console.log(optionsCopy, "optionsCopy");
     const questionsCopy = deepCopy(currentQuestions);
-    questionsCopy[questionIndex]["options"] = optionsCopy;
+    console.log(questionsCopy, "questionsCopy");
+    questionsCopy[questionIndex].options = optionsCopy;
+    console.log(questionsCopy, "questionsCopy");
     changeQuestionHandler(questionsCopy);
   };
 
   const onDeleteHandler = (index: number | undefined) => {
     if (index === undefined) return;
     const optionsCopy = [...options];
+    console.log(optionsCopy, "optionsCopy");
     const filtered = optionsCopy.filter((_, i) => i !== index);
+    console.log(filtered, "filtered");
 
     const questionsCopy = deepCopy(currentQuestions);
-    questionsCopy[questionIndex]["options"] = filtered;
+    questionsCopy[questionIndex].options = filtered;
 
     changeQuestionHandler(questionsCopy);
   };
@@ -59,11 +62,11 @@ const Choice = ({ choice, options, questionIndex }: ChoiceProps) => {
   };
 
   return (
-    <Droppable droppableId={`innerDroppable-${questionIndex}`} type="option-droppable">
+    <Droppable droppableId={`innerDroppable-${Math.random()}`} type="option-droppable">
       {(innerProvided) => (
         <ChoiceList ref={innerProvided.innerRef} {...innerProvided.droppableProps}>
           {options.map((option, i) => (
-            <Draggable key={option.id} draggableId={`inner-draggable${option.id}`} index={i}>
+            <Draggable key={i} draggableId={`${questionIndex}-inner-draggable${i}`} index={i}>
               {(innerProvided) => (
                 <ChoiceContainer //
                   ref={innerProvided.innerRef}
@@ -79,7 +82,7 @@ const Choice = ({ choice, options, questionIndex }: ChoiceProps) => {
                     index={i}
                     onChange={onChangeHandler}
                     placeHolder="옵션"
-                    value={option.content}
+                    value={option}
                   />
                   <CloseIcon className="icon" onClick={() => onDeleteHandler(i)} />
                 </ChoiceContainer>

@@ -23,6 +23,7 @@ const Edit = () => {
     if (type === "option-droppable") {
       const copyDestination = deepCopy(destination);
       const split = copyDestination.droppableId.split("-");
+      console.log(split, "split");
       const droppableIndex = +split[1];
 
       const [reorderedItem] = newItems[droppableIndex].options.splice(source.index, 1);
