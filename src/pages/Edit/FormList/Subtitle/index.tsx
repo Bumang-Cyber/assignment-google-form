@@ -3,6 +3,7 @@ import Input from "@/components/Input";
 import FocusIndicator from "@/components/FocusIndicator";
 import useFocus from "@/hooks/useFocus";
 import { useState } from "react";
+import { localSaveByDebounce } from "@/utils/localSaveByDebounce";
 
 const Title = () => {
   const { focus, focusHandler, blurHandler } = useFocus();
@@ -12,8 +13,10 @@ const Title = () => {
 
   const titleChangeHandler = (str: string, i: number | undefined) => {
     if (i === 0) {
+      localSaveByDebounce("form-title", str);
       setTitle(str);
     } else {
+      localSaveByDebounce("form-description", str);
       setDescription(str);
     }
   };
