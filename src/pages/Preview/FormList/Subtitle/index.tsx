@@ -3,19 +3,19 @@ import Input from "@/components/Input";
 import FocusIndicator from "@/components/FocusIndicator";
 import useFocus from "@/hooks/useFocus";
 import { useState } from "react";
+import { localSaveByDebounce } from "@/utils/localSaveByDebounce";
 
 const Title = () => {
   const { focus, focusHandler } = useFocus();
 
   const [title, setTitle] = useState(() => localStorage.getItem("form-title") || "");
   const [description, setDescription] = useState(() => localStorage.getItem("form-description") || "");
-
   const titleChangeHandler = (str: string, i: number | undefined) => {
     if (i === 0) {
-      localStorage.setItem("form-title", str);
+      localSaveByDebounce("form-title", str);
       setTitle(str);
     } else {
-      localStorage.setItem("form-description", str);
+      localSaveByDebounce("form-description", str);
       setDescription(str);
     }
   };

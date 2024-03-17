@@ -7,12 +7,18 @@ interface ToggleProps {
 }
 
 function Toggle({ index }: ToggleProps) {
-  const [toggle, setToggle] = useState(false);
-  const { setRequiredByIndexHandler } = useQuestion();
+  const { setRequiredByIndexHandler, currentQuestions } = useQuestion();
+  const [toggle, setToggle] = useState(() => currentQuestions[index].required);
 
   const clickedToggle = () => {
-    setToggle((prev) => !prev);
-    setRequiredByIndexHandler(toggle, index);
+    const current = currentQuestions[index].required;
+    if (current) {
+      setToggle(false);
+    } else {
+      setToggle(true);
+    }
+
+    setRequiredByIndexHandler(!current, index);
   };
 
   return (

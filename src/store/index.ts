@@ -1,6 +1,7 @@
 import { QuestionType } from "@/types/question";
 import { configureStore } from "@reduxjs/toolkit";
 import questionSlice from "./questionSlice";
+import { localSaveByDebounce } from "@/utils/localSaveByDebounce";
 
 const store = configureStore({
   reducer: {
@@ -12,7 +13,7 @@ const store = configureStore({
 const saveStateToLocalStorage = (state: { question: QuestionType[] }) => {
   try {
     const serializedState = JSON.stringify(state);
-    localStorage.setItem("form-questions", serializedState);
+    localSaveByDebounce("form-questions", serializedState);
   } catch {
     return;
   }

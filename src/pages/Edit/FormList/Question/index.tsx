@@ -27,7 +27,6 @@ const Question = ({ category, options, index, title, id }: QuestionProps) => {
 
   const titleChangeHandler = (str: string) => {
     const copy = deepCopy(currentQuestions);
-    console.log(copy);
     copy[index].title = str;
     changeQuestionHandler(copy);
   };
