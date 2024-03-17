@@ -1,6 +1,10 @@
 import { type CategoryType, categories } from "@/types/category";
 
-import { MdOutlineShortText } from "react-icons/md";
+import { MdOutlineShortText as ShortIcon } from "react-icons/md";
+import { LuText as LongIcon } from "react-icons/lu";
+import { FaRegCheckSquare as CheckIcon } from "react-icons/fa";
+import { IoIosArrowDropdown as DropIcon } from "react-icons/io";
+import { IoMdRadioButtonOn as RadioIcon } from "react-icons/io";
 import { FaCaretDown } from "react-icons/fa6";
 
 import { useState } from "react";
@@ -25,7 +29,11 @@ const OptionButton = ({ selected, index }: OptionProps) => {
             category === selected && (
               <OptionContainer key={index} onClick={changeShowHandler}>
                 <div>
-                  <MdOutlineShortText className="icon" />
+                  {category === "단답형" && <ShortIcon className="icon" />}
+                  {category === "장문형" && <LongIcon className="icon" />}
+                  {category === "체크박스" && <CheckIcon className="icon" />}
+                  {category === "드롭다운" && <DropIcon className="icon" />}
+                  {category === "객관식 질문" && <RadioIcon className="icon" />}
                   <span>{category}</span>
                 </div>
                 <FaCaretDown />

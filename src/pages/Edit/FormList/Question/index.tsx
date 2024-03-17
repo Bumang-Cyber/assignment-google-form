@@ -77,6 +77,12 @@ const TitleInput = styled.input`
   height: 56px;
   transition: all 0.2s ease-in-out;
 
+  &:hover {
+    padding: 0 16px;
+    background-color: ${({ theme }) => theme.color.gray100};
+    border-bottom: 2px solid ${({ theme }) => theme.color.blue700};
+  }
+
   &:focus {
     padding: 0 16px;
     background-color: ${({ theme }) => theme.color.gray100};
