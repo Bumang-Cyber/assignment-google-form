@@ -3,6 +3,7 @@ import { type CategoryType } from "@/types/category";
 import { deepCopy } from "@/utils/deepCopy";
 import { MdOutlineDragIndicator as Drag } from "react-icons/md";
 import { Draggable } from "@hello-pangea/dnd";
+import { OptionType } from "@/types/question";
 
 import FocusIndicator from "@/components/FocusIndicator";
 import useFocus from "@/hooks/useFocus";
@@ -13,7 +14,7 @@ import useQuestion from "@/hooks/useQuestion";
 
 interface QuestionProps {
   category: CategoryType;
-  options: string[];
+  options: OptionType[];
   index: number;
   title: string;
   id: number;
@@ -32,17 +33,16 @@ const Question = ({ category, options, index, title, id }: QuestionProps) => {
   };
 
   return (
-    <Draggable draggableId={draggableId} index={index}>
+    <Draggable draggableId={`draggable-${draggableId}`} index={index}>
       {(provided) => (
         <Container //
           onFocus={focusHandler}
           onBlur={blurHandler}
           ref={provided.innerRef}
           {...provided.draggableProps}
-          {...provided.dragHandleProps}
         >
           <FocusIndicator focus={focus} />
-          <DragContainer>
+          <DragContainer {...provided.dragHandleProps}>
             <DragIcon />
           </DragContainer>
           <Header>
@@ -124,6 +124,8 @@ const DragContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  ${({ theme }) => theme.draggable}
 `;
 
 const DragIcon = styled(Drag)`

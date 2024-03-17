@@ -5,7 +5,7 @@ import useFocus from "@/hooks/useFocus";
 import { useState } from "react";
 
 const Title = () => {
-  const { focus, focusHandler } = useFocus();
+  const { focus, focusHandler, blurHandler } = useFocus();
 
   const [title, setTitle] = useState(() => localStorage.getItem("form-title") || "");
   const [description, setDescription] = useState(() => localStorage.getItem("form-description") || "");
@@ -21,7 +21,7 @@ const Title = () => {
   };
 
   return (
-    <Container onFocus={focusHandler} onBlur={focusHandler}>
+    <Container onFocus={focusHandler} onBlur={blurHandler}>
       <HeadDecoration />
       <FocusIndicator focus={focus} />
       <Input type="title" placeHolder="제목 없는 설문지" onChange={titleChangeHandler} index={0} value={title} />

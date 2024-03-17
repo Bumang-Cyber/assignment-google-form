@@ -18,7 +18,7 @@ const Choice = ({ choice, options, questionIndex }: ChoiceProps) => {
 
   const onChangeHandler = (str: string, index: number | undefined) => {
     if (index === undefined) return;
-    const optionsCopy = [...options];
+    const optionsCopy = deepCopy(options);
     optionsCopy[index] = str;
     console.log(optionsCopy, "optionsCopy");
 

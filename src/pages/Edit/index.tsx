@@ -3,18 +3,32 @@ import AddButton from "@/components/AddButton";
 import FormList from "./FormList";
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 import useQuestion from "@/hooks/useQuestion";
+import { deepCopy } from "@/utils/deepCopy";
 
 const Edit = () => {
   const { currentQuestions, changeQuestionHandler } = useQuestion();
 
-  const onDragEnd = ({ destination, source }: DropResult) => {
+  const onDragEnd = ({ destination, source, type }: DropResult) => {
     if (!destination) return; // 드래그를 취소한 경우
+    const newItems = deepCopy(currentQuestions);
+    console.log(type, "type");
 
-    const newItems = [...currentQuestions];
-    const [reorderedItem] = newItems.splice(source.index, 1);
-    newItems.splice(destination.index, 0, reorderedItem);
+    if (type === "question-droppable") {
+      const [reorderedItem] = newItems.splice(source.index, 1);
+      newItems.splice(destination.index, 0, reorderedItem);
 
-    changeQuestionHandler(newItems);
+      changeQuestionHandler(newItems);
+    }
+
+    if (type === "option-droppable") {
+      const copyDestination = deepCopy(destination);
+      const split = copyDestination.droppableId.split("-");
+      const droppableIndex = +split[1];
+
+      const [reorderedItem] = newItems[droppableIndex].options.splice(source.index, 1);
+      newItems[droppableIndex].options.splice(copyDestination.index, 0, reorderedItem);
+      changeQuestionHandler(newItems);
+    }
   };
 
   return (

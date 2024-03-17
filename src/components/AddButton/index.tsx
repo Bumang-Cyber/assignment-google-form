@@ -6,7 +6,9 @@ const AddButton = () => {
   const { pushQuestionHandler } = useQuestion();
 
   return (
-    <ButtonContainer onClick={() => pushQuestionHandler({ id: Date.now(), title: "", category: "단답형", options: ["옵션 1"], required: false })}>
+    <ButtonContainer //
+      onClick={() => pushQuestionHandler({ id: Date.now(), title: "", category: "단답형", options: [{ id: Date.now(), content: "옵션 1" }], required: false })}
+    >
       <div>
         <BiPlusCircle className="add" />
       </div>
@@ -17,6 +19,7 @@ const AddButton = () => {
 export default AddButton;
 
 const ButtonContainer = styled.div`
+  position: relative;
   width: 64px;
   height: 64px;
   background-color: white;

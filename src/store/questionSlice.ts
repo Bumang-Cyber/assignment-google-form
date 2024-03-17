@@ -11,7 +11,7 @@ const initialState: InitialState = {
       id: Date.now(),
       title: "",
       category: "단답형",
-      options: ["옵션 1"],
+      options: [{ id: Date.now(), content: "옵션 1" }],
       required: false,
     },
   ],

@@ -9,7 +9,7 @@ const FormList = () => {
   const { currentQuestions } = useQuestion();
 
   return (
-    <Droppable droppableId="droppable">
+    <Droppable droppableId="question-droppable" type="question-droppable">
       {(provided) => (
         <FormListContainer ref={provided.innerRef} {...provided.droppableProps}>
           <Title />
@@ -23,6 +23,7 @@ const FormList = () => {
               id={id}
             />
           ))}
+          {provided.placeholder}
         </FormListContainer>
       )}
     </Droppable>

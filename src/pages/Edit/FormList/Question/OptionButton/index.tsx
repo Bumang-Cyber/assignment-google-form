@@ -5,7 +5,7 @@ import { LuText as LongIcon } from "react-icons/lu";
 import { FaRegCheckSquare as CheckIcon } from "react-icons/fa";
 import { IoIosArrowDropdown as DropIcon } from "react-icons/io";
 import { IoMdRadioButtonOn as RadioIcon } from "react-icons/io";
-import { FaCaretDown } from "react-icons/fa6";
+import { FaCaretDown as DownIcon } from "react-icons/fa6";
 
 import { useState } from "react";
 import styled from "styled-components";
@@ -36,7 +36,7 @@ const OptionButton = ({ selected, index }: OptionProps) => {
                   {category === "객관식 질문" && <RadioIcon className="icon" />}
                   <span>{category}</span>
                 </div>
-                <FaCaretDown />
+                <DownIcon />
               </OptionContainer>
             )
         )}
