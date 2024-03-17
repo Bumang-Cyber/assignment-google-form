@@ -12,8 +12,8 @@ interface BodyProps {
 const Body = ({ category, options, index }: BodyProps) => {
   return (
     <>
-      {category === "단답형" && <Short />}
-      {category === "장문형" && <Long />}
+      {category === "단답형" && <Short questionIndex={index} />}
+      {category === "장문형" && <Long questionIndex={index} />}
 
       {category === "객관식 질문" && (
         <Choice //

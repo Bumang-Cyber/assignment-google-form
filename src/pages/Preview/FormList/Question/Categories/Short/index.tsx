@@ -1,7 +1,17 @@
+import { setAnswer } from "@/utils/setAnswer";
 import styled from "styled-components";
 
-const Short = () => {
-  return <InputContainer placeholder="단답형 텍스트" />;
+interface textProps {
+  questionIndex: number;
+}
+
+const Short = ({ questionIndex }: textProps) => {
+  const textInputHandler = (e: React.ChangeEvent) => {
+    const target = e.target as HTMLInputElement;
+    setAnswer(questionIndex, target.value);
+  };
+
+  return <InputContainer placeholder="단답형 텍스트" onChange={textInputHandler} />;
 };
 
 export default Short;

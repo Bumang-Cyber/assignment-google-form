@@ -1,6 +1,11 @@
+import { setAnswer } from "@/utils/setAnswer";
 import styled from "styled-components";
 
-const Long = () => {
+interface textProps {
+  questionIndex: number;
+}
+
+const Long = ({ questionIndex }: textProps) => {
   const inputHandler = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     const target = e.target as HTMLTextAreaElement;
 
@@ -8,7 +13,12 @@ const Long = () => {
     target.style.height = target.scrollHeight + "px";
   };
 
-  return <InputContainer placeholder="장문형 텍스트" onInput={inputHandler} />;
+  const textInputHandler = (e: React.ChangeEvent) => {
+    const target = e.target as HTMLInputElement;
+    setAnswer(questionIndex, target.value);
+  };
+
+  return <InputContainer placeholder="장문형 텍스트" onInput={inputHandler} onChange={textInputHandler} />;
 };
 
 export default Long;

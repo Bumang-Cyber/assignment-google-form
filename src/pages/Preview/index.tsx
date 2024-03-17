@@ -1,10 +1,15 @@
 import styled from "styled-components";
 import FormList from "./FormList";
+import AnswerSheet from "./AnswerSheet";
+import { useState } from "react";
 
 const Preview = () => {
+  const [isShow, setIsShow] = useState(false);
+
   return (
     <PreviewContainer>
-      <FormList />
+      <FormList setIsShow={setIsShow} />
+      <AnswerSheet isShow={isShow} setIsShow={setIsShow} />
     </PreviewContainer>
   );
 };

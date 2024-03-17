@@ -24,8 +24,8 @@ const Title = () => {
     <Container onFocus={focusHandler} onBlur={focusHandler}>
       <HeadDecoration />
       <FocusIndicator focus={focus} />
-      <Input type="title" placeHolder="제목 없는 설문지" onChange={titleChangeHandler} index={0} value={title} />
-      <Input placeHolder="설문지 설명" onChange={titleChangeHandler} index={1} value={description} />
+      <Input type="title" placeHolder="제목 없는 설문지" isDisabled={true} onChange={titleChangeHandler} index={0} value={title} />
+      <Input placeHolder="설문지 설명" isDisabled={true} onChange={titleChangeHandler} index={1} value={description} />
     </Container>
   );
 };

@@ -1,10 +1,9 @@
 import Input from "@/components/Input";
-import useQuestion from "@/hooks/useQuestion";
 import { type ChoiceCategory } from "@/types/category";
-import { deepCopy } from "@/utils/deepCopy";
 import styled from "styled-components";
 import Dropdown from "./Dropdown";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { setAnswer } from "@/utils/setAnswer";
 
 interface ChoiceProps {
   choice: ChoiceCategory;
@@ -13,19 +12,21 @@ interface ChoiceProps {
 }
 
 const Choice = ({ choice, options, questionIndex }: ChoiceProps) => {
-  const { currentQuestions, changeQuestionHandler } = useQuestion();
   const [selected, setSelected] = useState(options[0]);
 
-  const onChangeHandler = (str: string, index: number | undefined) => {
-    if (index === undefined) return;
-    const optionsCopy = [...options];
-    optionsCopy[index] = str;
-    console.log(optionsCopy, "optionsCopy");
+  useEffect(() => {
+    setAnswer(questionIndex, selected);
+    // eslint-disable-next-line
+  }, [selected]);
 
-    const questionsCopy = deepCopy(currentQuestions);
-    questionsCopy[questionIndex]["options"] = optionsCopy;
-
-    changeQuestionHandler(questionsCopy);
+  const checkHandler = (e: React.ChangeEvent<HTMLInputElement>, str: string) => {
+    const target = e.target as HTMLInputElement;
+    if (target.checked) {
+      console.log(str, target, target.checked, questionIndex);
+      setAnswer(questionIndex, str);
+    } else {
+      setAnswer(questionIndex, "");
+    }
   };
 
   if (choice === "객관식 질문" || choice === "체크박스") {
@@ -33,11 +34,11 @@ const Choice = ({ choice, options, questionIndex }: ChoiceProps) => {
       <ChoiceList>
         {options.map((option, i) => (
           <ChoiceContainer key={i}>
-            {choice === "객관식 질문" && <input name="radio" type="radio" />}
-            {choice === "체크박스" && <input type="checkbox" />}
+            {choice === "객관식 질문" && <input onChange={(e) => checkHandler(e, option)} name="radio" type="radio" />}
+            {choice === "체크박스" && <input onChange={(e) => checkHandler(e, option)} type="checkbox" />}
             <Input //
               index={i}
-              onChange={onChangeHandler}
+              onChange={() => {}}
               placeHolder="옵션"
               value={option}
               isDisabled={true}

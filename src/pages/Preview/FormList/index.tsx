@@ -4,8 +4,12 @@ import Title from "./Subtitle";
 
 import useQuestion from "@/hooks/useQuestion";
 
+interface FormProps {
+  setIsShow: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 // TODO: 가장 최근 선택 남기기
-const FormList = () => {
+const FormList = ({ setIsShow }: FormProps) => {
   const { currentQuestions } = useQuestion();
 
   return (
@@ -21,6 +25,7 @@ const FormList = () => {
           title={title}
         />
       ))}
+      <SubmitButton onClick={() => setIsShow(true)}>제출</SubmitButton>
     </FormListContainer>
   );
 };
@@ -34,4 +39,16 @@ const FormListContainer = styled.section`
   display: flex;
   flex-direction: column;
   gap: 16px;
+`;
+
+const SubmitButton = styled.button`
+  width: 100%;
+  height: 60px;
+  background-color: ${({ theme }) => theme.color.blue700};
+  border-radius: 8px;
+  color: white;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.color.blue800};
+  }
 `;
